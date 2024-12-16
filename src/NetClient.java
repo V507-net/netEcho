@@ -22,12 +22,12 @@ public class NetClient extends JFrame implements KeyListener {
     PrintWriter out;
 
     NetClient() {
-        // ??????? ????
+        // Создаем окно
         super("Simple Chat client");
         setSize(400, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        // ????????? ?? ???? ????????? ????
+        // Добавляем на окно текстовое поле
         textArea = new JTextArea();
         textArea.setBackground(Color.BLACK);
         textArea.setForeground(Color.WHITE);
@@ -36,7 +36,7 @@ public class NetClient extends JFrame implements KeyListener {
         scrollPane = new JScrollPane(textArea);
         this.add(scrollPane);
 
-        // ?????????????? ? ???????
+        // Подсоединяемся к серверу
         connect();
 
     }
@@ -58,8 +58,8 @@ public class NetClient extends JFrame implements KeyListener {
         }
 
         new Thread() {
-            // ? ????????? ??????
-            // ????????? ??????? ?? ???????
+            // в отдельном потоке
+            // принимаем символы от сервера
             public void run() {
                 char cLast;
                 while (true) {
@@ -82,15 +82,8 @@ public class NetClient extends JFrame implements KeyListener {
                 }
 
 
-            };
+            }
         }.start();
-
-//        if (socket.isClosed())
-//        {
-//            System.exit(1);
-//        }
-
-
     }
 
     public static void main(String[] args) {
@@ -104,7 +97,7 @@ public class NetClient extends JFrame implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent arg0) {
-        // ?????????? ???????????? ?????? ? ???? ? ?? ?????
+        // отправляем напечатанный символ в сеть и на экран
         out.print(arg0.getKeyChar());
         out.flush();
 
